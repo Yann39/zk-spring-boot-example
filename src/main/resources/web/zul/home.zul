@@ -1,0 +1,79 @@
+<div sclass="row" apply="org.zkoss.bind.BindComposer"
+     viewModel="@id('homeVm') @init('com.example.zkspringbootexample.vm.HomeVm')">
+    <div sclass="col">
+
+        <div sclass="row py-3">
+            <div sclass="col">
+                <label value="${labels.title.welcome}" sclass="h2"/>
+            </div>
+        </div>
+
+        <div sclass="row">
+            <div sclass="col">
+                <html content="${labels.message.welcome}"/>
+            </div>
+        </div>
+
+        <div sclass="row mt-3">
+            <div sclass="col">
+                <groupbox closable="false">
+                    <caption>
+                        <label value="${labels.title.availableCourses}"/>
+                    </caption>
+                    <div sclass="row">
+                        <div sclass="col">
+                            <hlayout>
+                                <textbox value="@bind(homeVm.filter)" onOK="@command('loadCourses')"
+                                         placeholder="${labels.ph.searchCourses}" hflex="1"/>
+                                <button iconSclass="z-icon-search" onClick="@command('loadCourses')"/>
+                            </hlayout>
+                        </div>
+                    </div>
+                    <div sclass="row mt-3">
+                        <div sclass="col">
+                            <listbox model="@load(homeVm.courses)" mold="paging" pageSize="10"
+                                     emptyMessage="${labels.message.noCourses}">
+                                <listhead sclass="list-header">
+                                    <listheader hflex="13" sort="auto(title)" label="${labels.label.courseTitle}"/>
+                                    <listheader hflex="17" sort="auto(description)"
+                                                label="${labels.label.courseDescription}"/>
+                                    <listheader hflex="10" sort="auto(location)"
+                                                label="${labels.label.courseLocation}"/>
+                                    <listheader hflex="8" sort="auto(status)" label="${labels.label.courseStatus}"/>
+                                    <listheader hflex="11" sort="auto(startDate)"
+                                                label="${labels.label.courseStartDate}"/>
+                                    <listheader hflex="11" sort="auto(endDate)" label="${labels.label.courseEndDate}"/>
+                                    <listheader hflex="8" label="${labels.label.registration}"/>
+                                </listhead>
+                                <template name="model" var="crs">
+                                    <listitem>
+                                        <listcell label="@load(crs.title)" tooltiptext="@load(crs.title)"/>
+                                        <listcell>
+                                            <label value="@load(crs.description)"
+                                                   tooltiptext="@load(crs.description)" maxlength="100"/>
+                                        </listcell>
+                                        <listcell label="@load(crs.location)"/>
+                                        <listcell>
+                                            <label sclass="@load(crs.status eq 'open' ? 'badge badge-success' : 'badge badge-secondary')"
+                                                   value="@load(crs.status)"/>
+                                        </listcell>
+                                        <listcell
+                                                label="@load(crs.startDate) @converter('formatedDate',format='dd.MM.yyyy HH:mm')"/>
+                                        <listcell
+                                                label="@load(crs.endDate) @converter('formatedDate',format='dd.MM.yyyy HH:mm')"/>
+                                        <listcell>
+                                            <button label="${labels.action.register}"
+                                                    onClick="@command('goToRegisterCourse', course=crs)"
+                                                    disabled="@load(crs.status ne 'open')"/>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </div>
+                    </div>
+                </groupbox>
+            </div>
+        </div>
+
+    </div>
+</div>

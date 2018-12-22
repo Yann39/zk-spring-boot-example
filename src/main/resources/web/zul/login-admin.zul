@@ -1,0 +1,3 @@
+<zk>
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('loginAdminVm') @init('com.example.zkspringbootexample.vm.LoginAdminVm')"/>
+</zk>

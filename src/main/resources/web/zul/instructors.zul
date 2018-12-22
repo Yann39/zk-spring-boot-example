@@ -1,0 +1,70 @@
+<zk>
+    <div sclass="row" apply="org.zkoss.bind.BindComposer"
+         viewModel="@id('instructorVm') @init('com.example.zkspringbootexample.vm.InstructorVm')">
+        <div sclass="col">
+            <groupbox closable="false">
+                <caption>
+                    <label value="${labels.title.instructors}"/>
+                </caption>
+                <div sclass="row">
+                    <div sclass="col">
+                        <hlayout>
+                            <textbox value="@bind(instructorVm.filter)" onOK="@command('loadInstructors')"
+                                     placeholder="${labels.ph.searchInstructors}" hflex="1"/>
+                            <button iconSclass="z-icon-search" onClick="@command('loadInstructors')"/>
+                        </hlayout>
+                    </div>
+                </div>
+                <div sclass="row mt-3">
+                    <div sclass="col">
+                        <grid mold="paging" pageSize="5" emptyMessage="${labels.message.noInstructors}"
+                              model="@load(instructorVm.instructors) @template(each.displayEdit ? 'editable' : 'non-editable')">
+                            <columns>
+                                <column hflex="1" sort="auto(instructor.firstName)">${labels.label.firstName}</column>
+                                <column hflex="1" sort="auto(instructor.lastName)">${labels.label.lastName}</column>
+                                <column hflex="1" sort="auto(instructor.email)">${labels.label.email}</column>
+                                <column hflex="1">${labels.label.edit}</column>
+                            </columns>
+                            <template name="editable">
+                                <row>
+                                    <textbox hflex="1" constraint="no empty"
+                                            value="@load(each.instructor.firstName) @save(each.instructor.firstName, before='confirmEdit')"/>
+                                    <textbox hflex="1" constraint="no empty"
+                                            value="@load(each.instructor.lastName) @save(each.instructor.lastName, before='confirmEdit')"/>
+                                    <textbox hflex="1" constraint="/.+@.+\.[a-z]+/: ${labels.constraint.email}"
+                                            value="@load(each.instructor.email) @save(each.instructor.email, before='confirmEdit')"/>
+                                    <div>
+                                        <button sclass="btn-success" iconSclass="z-icon-check"
+                                                onClick="@command('confirmEdit', instructor=each)"/>
+                                        <button sclass="btn-danger" iconSclass="z-icon-times"
+                                                onClick="@command('changeEditableStatus', instructor=each)"/>
+                                    </div>
+                                </row>
+                            </template>
+                            <template name="non-editable">
+                                <row>
+                                    <label value="@load(each.instructor.firstName)"/>
+                                    <label value="@load(each.instructor.lastName)"/>
+                                    <label value="@load(each.instructor.email)"/>
+                                    <div>
+                                        <button sclass="btn-success" iconSclass="z-icon-pencil"
+                                                onClick="@command('changeEditableStatus', instructor=each)"/>
+                                        <button sclass="btn-danger" iconSclass="z-icon-trash"
+                                                onClick="@command('removeInstructor', instructor=each)"/>
+                                    </div>
+                                </row>
+                            </template>
+                        </grid>
+                    </div>
+                </div>
+                <div sclass="row mt-3">
+                    <div sclass="col">
+                        <button sclass="btn-success" label="${labels.action.save}" onClick="@command('saveInstructors')"/>
+                        <button sclass="btn-danger" label="${labels.action.cancel}" onClick="@command('loadInstructors')"/>
+                        <button label="${labels.action.add}" onClick="@command('addInstructor')"/>
+                    </div>
+                </div>
+            </groupbox>
+        </div>
+    </div>
+</zk>

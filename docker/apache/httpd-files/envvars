@@ -1,0 +1,8 @@
+# Environment variables for apachectl
+
+if test "x$LD_LIBRARY_PATH" != "x" ; then
+    LD_LIBRARY_PATH="/usr/local/apache2/lib:/usr/local/lib/:/usr/local/ssl/lib:$LD_LIBRARY_PATH"
+else
+    LD_LIBRARY_PATH="/usr/local/apache2/lib:/usr/local/lib:/usr/local/ssl/lib"
+fi
+export LD_LIBRARY_PATH

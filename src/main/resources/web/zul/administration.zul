@@ -1,0 +1,29 @@
+<zk>
+    <div sclass="row">
+        <div sclass="col">
+            <label value="${labels.title.administration}" sclass="h1 d-inline-block py-3"/>
+        </div>
+    </div>
+    <div sclass="row">
+        <div sclass="col">
+            <tabbox>
+                <tabs>
+                    <tab iconSclass="z-icon-graduation-cap" label="${labels.tab.courses}"/>
+                    <tab iconSclass="z-icon-tags" label="${labels.tab.categories}"/>
+                    <tab iconSclass="z-icon-male" label="${labels.tab.instructors}"/>
+                </tabs>
+                <tabpanels>
+                    <tabpanel>
+                        <include src="~./zul/courses.zul"/>
+                    </tabpanel>
+                    <tabpanel fulfill="self.linkedTab.onSelect">
+                        <include src="~./zul/categories.zul"/>
+                    </tabpanel>
+                    <tabpanel fulfill="self.linkedTab.onSelect">
+                        <include src="~./zul/instructors.zul"/>
+                    </tabpanel>
+                </tabpanels>
+            </tabbox>
+        </div>
+    </div>
+</zk>

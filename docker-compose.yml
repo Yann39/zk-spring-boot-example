@@ -1,0 +1,63 @@
+version: '3.5'
+
+networks:
+  zk-spring-boot-example-nw:
+
+volumes:
+  mariadb_bkp_zk-spring-boot-example:
+
+services:
+  zk-spring-boot-example-apache:
+    image: zk-spring-boot-example_apache
+    container_name: zk-spring-boot-example_apache
+    links:
+      - zk-spring-boot-example-app
+    build:
+      context: ./docker/apache
+      args:
+         APP_SERVICE_NAME: 'zk-spring-boot-example-app'
+    expose:
+      - 80
+      - 443
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - zk-spring-boot-example-nw
+
+  zk-spring-boot-example-mariadb:
+    image: zk-spring-boot-example_mariadb
+    container_name: zk-spring-boot-example_mariadb
+    build:
+      context: ./docker/mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: r00tPWD
+      MYSQL_USER: zkadmin
+      MYSQL_PASSWORD: zkpassword
+      MYSQL_DATABASE: zk_spring_boot_example
+    volumes:
+      - mariadb_bkp_zk-spring-boot-example:/var/lib/mysql
+    command: mysqld --lower_case_table_names=1
+    networks:
+      - zk-spring-boot-example-nw
+
+  zk-spring-boot-example-app:
+    image: zk-spring-boot-example_app
+    container_name: zk-spring-boot-example_app
+    build:
+      context: ./docker/app
+    volumes:
+      - ./target:/target
+      - ./docker/app/wait.sh:/usr/local/bin/wait.sh
+    command: bash -c "/usr/local/bin/wait.sh && java -XX:+PrintFlagsFinal -Xmx1024m -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/target/ -jar /target/zk-spring-boot-example-0.0.1-SNAPSHOT.jar"
+    expose:
+      - 8000
+      - 8009
+      - 8080
+    ports:
+      - 8000:8000
+      - 8080:8080
+    networks:
+      - zk-spring-boot-example-nw

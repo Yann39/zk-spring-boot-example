@@ -1,0 +1,11 @@
+<div sclass="row no-gutters u-header">
+    <div sclass="col-lg-4 p-3">
+        <a href="/">
+            <image src="img/zk-logo.png" height="80px" sclass="pr-3"/>
+            <image src="img/spring-boot-logo.png" height="90px"/>
+        </a>
+    </div>
+    <div sclass="col-lg-8 p-3">
+        <label value="${labels.title.applicationTitle}" sclass="h1"/>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div sclass="row">
+    <div sclass="col text-center my-2">
+        <label sclass="fu fu-symbols-23-o"/>
+        <label value="${labels.message.anyQuestion}"/>
+        <a href="mailto:helpdesk@example.com">help@example.com</a>
+    </div>
+</div>

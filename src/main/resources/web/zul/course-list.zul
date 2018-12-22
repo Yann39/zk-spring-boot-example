@@ -1,0 +1,53 @@
+<groupbox closable="false">
+    <caption>
+        <label value="${labels.title.courses}"/>
+    </caption>
+    <div sclass="row">
+        <div sclass="col">
+            <button sclass="btn-success" iconSclass="z-icon-plus" label="${labels.action.addCourse}" onClick="@command('goToCreateCourse')"/>
+        </div>
+    </div>
+    <div sclass="row mt-3">
+        <div sclass="col">
+            <hlayout>
+                <textbox value="@bind(courseVm.filter)" onOK="@command('loadCourses')"
+                         placeholder="${labels.ph.searchCourses}" hflex="1"/>
+                <button iconSclass="z-icon-search" onClick="@command('loadCourses')"/>
+            </hlayout>
+        </div>
+    </div>
+    <div sclass="row mt-3">
+        <div sclass="col">
+            <listbox model="@load(courseVm.courses)" mold="paging" pageSize="10"
+                     emptyMessage="${labels.message.noCourses}">
+                <listhead sclass="list-header">
+                    <listheader hflex="13" sort="auto(title)" label="${labels.label.courseTitle}"/>
+                    <listheader hflex="17" sort="auto(description)"
+                                label="${labels.label.courseDescription}"/>
+                    <listheader hflex="10" sort="auto(location)" label="${labels.label.courseLocation}"/>
+                    <listheader hflex="11" sort="auto(startDate)"
+                                label="${labels.label.courseStartDate}"/>
+                    <listheader hflex="11" sort="auto(endDate)" label="${labels.label.courseEndDate}"/>
+                    <listheader hflex="8" label="${labels.label.edit}"/>
+                </listhead>
+                <template name="model" var="crs">
+                    <listitem>
+                        <listcell label="@load(crs.title)" tooltiptext="@load(crs.title)"/>
+                        <listcell>
+                            <label value="@load(crs.description)" tooltiptext="@load(crs.description)" maxlength="100"/>
+                        </listcell>
+                        <listcell label="@load(crs.location)"/>
+                        <listcell
+                                label="@load(crs.startDate) @converter('formatedDate',format='dd.MM.yyyy HH:mm')"/>
+                        <listcell
+                                label="@load(crs.endDate) @converter('formatedDate',format='dd.MM.yyyy HH:mm')"/>
+                        <listcell>
+                            <button sclass="btn-success" iconSclass="z-icon-pencil" onClick="@command('goToEditCourse', course=crs)"/>
+                            <button sclass="btn-danger" iconSclass="z-icon-trash" onClick="@command('deleteCourse', course=crs)"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </div>
+    </div>
+</groupbox>

@@ -1,0 +1,90 @@
+<groupbox closable="false">
+    <caption>
+        <label value="${labels.title.newCourse}"/>
+    </caption>
+    <div form="@id('c') @load(courseVm.course) @save(courseVm.course, before={'createCourse','updateCourse'})">
+        <div sclass="row form-group">
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseTitle}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-10">
+                <textbox hflex="1" placeholder="${labels.ph.courseTitleEx}" value="@bind(c.title)" multiline="false"/>
+            </div>
+        </div>
+        <div sclass="row form-group">
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseDescription}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-10">
+                <ckeditor hflex="1" value="@bind(c.description)" customConfigurationsPath="/js/config-ckeditor.js"/>
+            </div>
+        </div>
+        <div sclass="row form-group">
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseLanguage}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-4">
+                <combobox placeholder="${labels.ph.selectAValue}" model="@load(courseVm.languageList)" readonly="true"
+                          constraint="no empty" selectedItem="@bind(c.language)" hflex="1">
+                    <template name="model" var="lang">
+                        <comboitem label="@load(lang.name)" value="@bind(lang)"/>
+                    </template>
+                </combobox>
+            </div>
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseLocation}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-4">
+                <textbox value="@bind(c.location)" constraint="no empty" placeholder="${labels.ph.courseLocationEx}"
+                         hflex="1"/>
+            </div>
+        </div>
+        <div sclass="row form-group">
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseStartDate}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-4">
+                <datebox value="@bind(c.startDate)" format="dd.MM.yyyy HH:mm" constraint="no empty"
+                         placeholder="DD.MM.YYYY hh:mm" hflex="1"/>
+            </div>
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseEndDate}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-4">
+                <datebox value="@bind(c.endDate)" format="dd.MM.yyyy HH:mm" constraint="no empty"
+                         placeholder="DD.MM.YYYY hh:mm" hflex="1"/>
+            </div>
+        </div>
+        <div sclass="row form-group">
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseInstructor}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-4">
+                <combobox placeholder="${labels.ph.selectAValue}" model="@load(courseVm.instructorList)" readonly="true"
+                          constraint="no empty" selectedItem="@bind(c.instructor)" hflex="1">
+                    <template name="model" var="instr">
+                        <comboitem label="@load(instr.fullName)" value="@bind(instr)"/>
+                    </template>
+                </combobox>
+            </div>
+            <div sclass="col-lg-2">
+                <label value="${labels.label.courseStatus}" sclass="label-required"/>
+            </div>
+            <div sclass="col-lg-4">
+                <combobox placeholder="${labels.ph.selectAValue}" readonly="true"
+                          constraint="no empty" selectedItem="@bind(c.status)" hflex="1">
+                    <comboitem label="${labels.option.open}" value="open"/>
+                    <comboitem label="${labels.option.closed}" value="closed"/>
+                </combobox>
+            </div>
+        </div>
+        <div sclass="row">
+            <div sclass="col">
+                <button sclass="btn-success" label="${labels.action.save}" onClick="@command('createCourse')" visible="@load(empty c.id)"/>
+                <button sclass="btn-success" label="${labels.action.save}" onClick="@command('updateCourse')"
+                        visible="@load(not empty c.id)"/>
+                <button sclass="btn-danger" label="${labels.action.cancel}" onClick="@command('goToCourseList')"/>
+            </div>
+        </div>
+    </div>
+</groupbox>

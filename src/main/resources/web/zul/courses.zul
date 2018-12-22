@@ -1,0 +1,8 @@
+<zk>
+    <div sclass="row" apply="org.zkoss.bind.BindComposer"
+         viewModel="@id('courseVm') @init('com.example.zkspringbootexample.vm.CourseVm')">
+        <div sclass="col">
+            <include src="@load(courseVm.centerPage)"/>
+        </div>
+    </div>
+</zk>

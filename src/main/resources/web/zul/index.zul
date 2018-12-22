@@ -1,0 +1,10 @@
+<?script type="text/javascript" src="/js/custom.js"?>
+<zk>
+    <div sclass="container-fluid" apply="org.zkoss.bind.BindComposer"
+         viewModel="@id('mainVm') @init('com.example.zkspringbootexample.vm.MainVm')">
+        <include src="~./zul/header.zul"/>
+        <include src="~./zul/user-bar.zul"/>
+        <include src="@load(mainVm.centerPage)"/>
+        <include src="~./zul/footer.zul"/>
+    </div>
+</zk>

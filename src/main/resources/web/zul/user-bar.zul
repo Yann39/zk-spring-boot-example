@@ -1,0 +1,16 @@
+<div sclass="row no-gutters">
+    <div sclass="col-lg-6">
+        <toolbar sclass="u-toolbar" align="start">
+            <toolbarbutton iconSclass="z-icon-home align-baseline" label="${labels.label.home}" href="/"/>
+            <toolbarbutton iconSclass="z-icon-lock align-baseline" label="${labels.label.admin}" href="/admin"/>
+        </toolbar>
+    </div>
+    <div sclass="col-lg-6">
+        <toolbar sclass="u-toolbar" align="end">
+            <toolbarbutton iconSclass="z-icon-user align-baseline" label="@load(mainVm.authenticatedAs)" href="/"
+                           visible="@load(not empty mainVm.authenticatedAs)"/>
+            <toolbarbutton onClick="@command('langFr')" image="img/france.png" sclass="u-flag"/>
+            <toolbarbutton onClick="@command('langEn')" image="img/england.png" sclass="u-flag"/>
+        </toolbar>
+    </div>
+</div>
