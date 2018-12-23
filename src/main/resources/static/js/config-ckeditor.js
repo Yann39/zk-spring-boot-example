@@ -1,8 +1,8 @@
-//CKEDITOR.plugins.addExternal('wordcount', 'plugins/wordcount/', 'plugin.js');
-//CKEDITOR.plugins.addExternal('notification', 'plugins/notification/', 'plugin.js');
+CKEDITOR.plugins.addExternal('wordcount', 'plugins/wordcount/', 'plugin.js');
+CKEDITOR.plugins.addExternal('notification', 'plugins/notification/', 'plugin.js');
 
 CKEDITOR.editorConfig = function (config) {
-    //config.extraPlugins = 'wordcount,notification';
+    config.extraPlugins = 'wordcount,notification';
     config.language = 'en';
     config.toolbar = 'custom';
     config.toolbar_custom = [
@@ -24,7 +24,7 @@ CKEDITOR.editorConfig = function (config) {
             items: ['Image', 'Table']
         }
     ];
-    /*config.wordcount = {
+    config.wordcount = {
         showParagraphs: true,
         showWordCount: true,
         showCharCount: true,
@@ -34,5 +34,5 @@ CKEDITOR.editorConfig = function (config) {
         maxWordCount: 1000,
         maxCharCount: -1,
         pasteWarningDuration: 0
-    };*/
+    };
 };

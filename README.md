@@ -19,6 +19,7 @@ Sample application integrating ZK with Spring Boot.
    - _zk-spring-boot-example_apache_ : Shibboleth-ready Apache
    - _zk-spring-boot-example_app_ : Application server (Undertow) with SSL (https), JPDA (debug) and JRebel (instant deploy) configured
    - _zk-spring-boot-example_mariadb_ : MariaDB database
+2. Build the project to create the JAR file
 2. Reach http://localhost/zk-spring-boot-example
 
 ## Licence
