@@ -16,7 +16,7 @@ Sample application integrating ZK with Spring Boot.
 ## Usage
 
 1. Run `docker-compose up` from the root folder, you should end up with 3 running containers :
-   - _zk-spring-boot-example_apache_ : Shibboleth-ready Apache
+   - _zk-spring-boot-example_apache_ : Apache
    - _zk-spring-boot-example_app_ : Application server (Undertow) with SSL (https), JPDA (debug) and JRebel (instant deploy) configured
    - _zk-spring-boot-example_mariadb_ : MariaDB database
 2. Build the project to create the JAR file
