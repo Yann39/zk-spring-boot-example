@@ -23,24 +23,24 @@ RUN cd ~ && mkdir sources && cd sources \
     && yum -y install cmake \
     && yum -y install autoconf \
     && yum -y install libtool \
-    && wget https://www.apache.org/dist/httpd/httpd-2.4.37.tar.gz \
+    && wget https://www.apache.org/dist/httpd/httpd-2.4.58.tar.gz \
     && wget https://github.com/nghttp2/nghttp2/releases/download/v1.34.0/nghttp2-1.34.0.tar.gz \
     && wget https://www.openssl.org/source/openssl-1.1.1.tar.gz \
-    && wget http://mirrors.whoishostingthis.com/apache/apr/apr-1.6.5.tar.gz \
-    && wget http://mirrors.whoishostingthis.com/apache/apr/apr-util-1.6.1.tar.gz \
-    && wget https://github.com/google/brotli/archive/master.tar.gz \
-    && tar -zxvf apr-1.6.5.tar.gz \
-    && cd apr-1.6.5 && ./configure && make && make install && cd .. \
-    && tar -zxvf apr-util-1.6.1.tar.gz \
-    && cd apr-util-1.6.1 && ./configure --with-apr=/usr/local/apr && make && make install && cd .. \
+    && wget https://dlcdn.apache.org//apr/apr-1.7.4.tar.gz \
+    && wget https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz \
+    && wget https://github.com/google/brotli/archive/refs/tags/v1.0.7.tar.gz \
+    && tar -zxvf apr-1.7.4.tar.gz \
+    && cd apr-1.7.4 && ./configure && make && make install && cd .. \
+    && tar -zxvf apr-util-1.6.3.tar.gz \
+    && cd apr-util-1.6.3 && ./configure --with-apr=/usr/local/apr && make && make install && cd .. \
     && tar -zxvf openssl-1.1.1.tar.gz \
     && cd openssl-1.1.1 && ./config shared zlib-dynamic --prefix=/usr/local/ssl && make && make install && cd .. \
     && tar -zxvf nghttp2-1.34.0.tar.gz \
     && cd nghttp2-1.34.0 && ./configure && make && make install && cd .. \
-    && tar -zxvf master.tar.gz \
-    && cd brotli-master && mkdir out && cd out && ../configure-cmake && make && make test && make install && cd ../.. \
-    && tar -zxvf httpd-2.4.37.tar.gz \
-    && cd httpd-2.4.37 && cp -r ../apr-1.6.5 srclib/apr && cp -r ../apr-util-1.6.1 srclib/apr-util && ./configure --with-ssl=/usr/local/ssl --with-pcre=/usr/bin/pcre-config --enable-unique-id --enable-ssl --enable-so --with-included-apr --enable-http2 --enable-brotli --with-brotli=/usr/local/brotli && make && make install && cd .. \
+    && tar -zxvf v1.0.7.tar.gz \
+    && cd brotli-1.0.7 && mkdir out && cd out && ../configure-cmake && make && make test && make install && cd ../.. \
+    && tar -zxvf httpd-2.4.58.tar.gz \
+    && cd httpd-2.4.58 && cp -r ../apr-1.7.4 srclib/apr && cp -r ../apr-util-1.6.3 srclib/apr-util && ./configure --with-ssl=/usr/local/ssl --enable-unique-id --enable-ssl --enable-so --with-included-apr --enable-http2 --enable-brotli --with-brotli=/usr/local/brotli && make && make install && cd .. \
     && yum -y clean all
 
 # copy Apache files to container

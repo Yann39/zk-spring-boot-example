@@ -168,8 +168,7 @@ public class CourseVm {
             ApplicationUtils.showInfo("message.courseCreated");
 
         } catch (Exception e) {
-            logger.error("Error when creating course : " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error when creating course", e);
         }
     }
 
@@ -193,8 +192,7 @@ public class CourseVm {
             ApplicationUtils.showInfo("message.courseUpdated");
 
         } catch (Exception e) {
-            logger.error("Error when updating course : " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error when updating course", e);
         }
     }
 
@@ -228,8 +226,7 @@ public class CourseVm {
             Messagebox.show(Labels.getLabel("message.deleteCourseConfirmation", new Object[]{getCourse().getTitle()}), "Confirmation", new Messagebox.Button[]{Messagebox.Button.YES, Messagebox.Button.NO}, Messagebox.QUESTION, clickListener);
 
         } catch (Exception e) {
-            logger.error("Error when deleting course : " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error when deleting course", e);
         }
     }
 

@@ -184,8 +184,7 @@ public class InstructorVm {
             };
             Messagebox.show(Labels.getLabel("message.saveModificationsConfirmation"), "Confirmation", new Messagebox.Button[]{Messagebox.Button.YES, Messagebox.Button.NO}, Messagebox.QUESTION, clickListener);
         } catch (Exception e) {
-            logger.error("Error when saving instructor list : " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error when saving instructor list", e);
         }
     }
 
